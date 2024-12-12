@@ -1,0 +1,87 @@
+// Heniel Putri Tangko Ramba Padang D121241044 //
+// Tugas UAS Sistem Digital // 
+
+
+#include <stdio.h>
+
+// Fungsi untuk menampilkan status segmen dari angka
+void displaySegment(int number) {
+    int segment[10][7] = {
+        {1, 1, 1, 1, 1, 1, 0}, // 0
+        {0, 1, 1, 0, 0, 0, 0}, // 1
+        {1, 1, 0, 1, 1, 0, 1}, // 2
+        {1, 1, 1, 1, 0, 0, 1}, // 3
+        {0, 1, 1, 0, 0, 1, 1}, // 4
+        {1, 0, 1, 1, 0, 1, 1}, // 5
+        {1, 0, 1, 1, 1, 1, 1}, // 6
+        {1, 1, 1, 0, 0, 0, 0}, // 7
+        {1, 1, 1, 1, 1, 1, 1}, // 8
+        {1, 1, 1, 1, 0, 1, 1}  // 9
+    };
+
+    printf("Status Segment untuk angka %d:\n", number);
+    printf("a = %d\n", segment[number][0]);
+    printf("b = %d\n", segment[number][1]);
+    printf("c = %d\n", segment[number][2]);
+    printf("d = %d\n", segment[number][3]);
+    printf("e = %d\n", segment[number][4]);
+    printf("f = %d\n", segment[number][5]);
+    printf("g = %d\n", segment[number][6]);
+
+    printf("Representasi Biner: ");
+    for (int i = 3; i >= 0; i--) {
+        printf("%d", (number >> i) & 1);
+    }
+    printf("\n");
+}
+
+// Fungsi untuk menampilkan visualisasi angka dalam bentuk seven segment
+void displaySevenSegment(int number) {
+    int segment[10][7] = {
+        {1, 1, 1, 1, 1, 1, 0}, // 0
+        {0, 1, 1, 0, 0, 0, 0}, // 1
+        {1, 1, 0, 1, 1, 0, 1}, // 2
+        {1, 1, 1, 1, 0, 0, 1}, // 3
+        {0, 1, 1, 0, 0, 1, 1}, // 4
+        {1, 0, 1, 1, 0, 1, 1}, // 5
+        {1, 0, 1, 1, 1, 1, 1}, // 6
+        {1, 1, 1, 0, 0, 0, 0}, // 7
+        {1, 1, 1, 1, 1, 1, 1}, // 8
+        {1, 1, 1, 1, 0, 1, 1}  // 9
+    };
+
+    printf("\nVisualisasi Seven Segment untuk angka %d:\n", number);
+
+    printf(" %s \n", segment[number][0] ? "--" : "  ");
+    printf("%s  %s\n", segment[number][5] ? "|" : " ", segment[number][1] ? "|" : " ");
+    printf(" %s \n", segment[number][6] ? "--" : "  ");
+    printf("%s  %s\n", segment[number][4] ? "|" : " ", segment[number][2] ? "|" : " ");
+    printf(" %s \n", segment[number][3] ? "--" : "  ");
+}
+
+int main() {
+    char input;
+    int number;
+
+    printf("Masukkan angka (0-9) atau 'X' untuk keluar:\n");
+
+    while (1) {
+        printf("\nInput: ");
+        scanf(" %c", &input);
+
+        if (input == 'X' || input == 'x') {
+            printf("Keluar dari program.\n");
+            break;
+        }
+
+        number = input - '0';
+        if (number >= 0 && number <= 9) {
+            displaySegment(number);
+            displaySevenSegment(number);
+        } else {
+            printf("Input tidak valid! Masukkan angka (0-9) atau 'X' untuk keluar.\n");
+        }
+    }
+
+    return 0;
+}
